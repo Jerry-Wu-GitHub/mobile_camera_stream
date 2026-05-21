@@ -1,3 +1,4 @@
+from typing import Optional
 from urllib.parse import urljoin
 
 import cv2
@@ -9,7 +10,7 @@ except ImportError:
     from config import BASE_URL
 
 
-def get_camera_stream(base_url: str = BASE_URL) -> cv2.VideoCapture:
+def get_camera_stream(base_url: Optional[str] = None) -> cv2.VideoCapture:
     """
     获取视频流。
 
@@ -40,6 +41,8 @@ def get_camera_stream(base_url: str = BASE_URL) -> cv2.VideoCapture:
     cv2.destroyAllWindows()
     ```
     """
+    if base_url is None:
+        base_url = BASE_URL
     if not base_url:
         raise ValueError("缺少参数 `base_url`")
 
